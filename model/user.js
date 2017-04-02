@@ -1,5 +1,6 @@
 const queryDB  = require('./db');
 
+
 const checkLogin = (u,p) =>{
     sql = `SELECT username, password 
         FROM public."User" 

@@ -2,6 +2,7 @@ let express = require('express');
 let app = express();
 
 const session = require('express-session');
+const cookieParser = require('cookie-parser');
 
 
 app.use(session({
@@ -12,7 +13,7 @@ app.use(session({
         maxAge: 5000
     }
 }));
-
+app.use(cookieParser());
 app.listen('3000', ()=> console.log('server started'));
 
 
@@ -29,6 +30,7 @@ app.use(express.static('public'));
 app.get('/', parser, require('./controller/home/home'));
 
 app.get('/place/:id', parser, require('./controller/place/get_place'));
+app.get('/journey/:id', parser, require('./controller/journey/detail_journey'));
 
 
 

@@ -1,10 +1,30 @@
-const {getListPlace} = require('../../model/place.js');
+const { getListPlace } = require('../../model/place.js');
+const { getUserByUsername } = require('../../model/user.js');
+const cookieParser = require('cookie-parser');
+const { verify } = require('../../config/jwt');
 
-
-module.exports = (req,res)=>{
-    if(req.session.daDangNhap === 0);
-    getListPlace().then(lstPlace => {
-        //res.send(req.cookies);
-        res.render('./front-end/home/index',{lstPlace: lstPlace.rows});
-    }); 
+module.exports = (req, res) => {
+    const token = req.cookies.tk_lg;
+    //res.send(token);
+    verify(token)
+        .then(r => {
+            getListPlace().then(lstPlace => {
+                //res.send(req.cookies);
+                getUserByUsername(r.username).then(detailUser => {
+                    res.render('./front-end/home/index', { lstPlace: lstPlace.rows, username: r.username, detailUser: detailUser.rows[0] });
+                }).catch(() => res.send('loi'));
+            });
+        })
+        .catch(() => getListPlace().then(lstPlace => {
+            //res.send(req.cookies);
+            //res.send(token);
+            cookie = req.cookies;
+            for (var prop in cookie) {
+                if (!cookie.hasOwnProperty(prop)) {
+                    continue;
+                }
+                res.cookie(prop, '', { expires: new Date(0) });
+            }
+            res.render('./front-end/home/index', { lstPlace: lstPlace.rows });
+        }));
 }

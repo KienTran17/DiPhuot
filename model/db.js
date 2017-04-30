@@ -25,6 +25,6 @@ const queryDB = (sql, arrayData) => (
     })
 )
 
-// queryDB('select * from "User"',[])
-// .then(res=> console.log(res.rows));
+// queryDB('select * from "user"',[])
+//  .then(res=> console.log(res.rows));
 module.exports = queryDB;

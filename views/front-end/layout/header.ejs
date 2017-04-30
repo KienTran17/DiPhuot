@@ -1,46 +1,188 @@
 <!-- THE HEADER -->
-	<header>
-        <div class="container-fluid custom-container">
-			<div class="row no_row row-header">
-				<div class="brand-be">
-					<a href=""><img src="../asset/img/logo.png" alt="logo" class="be_logo">
-					</a>
-				</div>
-				<div class="header-menu-block">
-					<button class="cmn-toggle-switch cmn-toggle-switch__htx"><span></span></button>
-					<ul class="header-menu" id="one">
-						<li class="active-header"><a href="/place">Find Projects</a><i class="fa fa-angle-down"></i>
-						
-						</li>
-						<li><a href="activity.html">Jobs</a></li>
-						<li><a href="search.html">Find Candidates</a><i class="fa fa-angle-down"></i>
-							<ul>
-								<li><a href="author-edit.html">AUTHOR EDIT</a></li>
-								<li><a href="author-login.html">AUTHOR LOGIN</a></li>
-								<li><a href="messages.html">MESSAGES</a></li>
-								<li><a href="messages-2.html">MESSAGES 2</a></li>
-							</ul>
-						</li>
-						<li><a href="blog-detail-2.html">Community</a><i class="fa fa-angle-down"></i>
+<header>
+	<div class="container-fluid custom-container">
+		<div class="row no_row row-header">
+			<div class="brand-be">
+				<a href=""><img src="../asset/img/logo.png" alt="logo" class="be_logo">
+				</a>
+			</div>
+			<div class="header-menu-block">
+				<button class="cmn-toggle-switch cmn-toggle-switch__htx"><span></span></button>
+				<ul class="header-menu" id="one">
+					<li class="active-header"><a href="/place">Find Projects</a><i class="fa fa-angle-down"></i>
+
+					</li>
+					<li><a href="activity.html">Jobs</a></li>
+					<li><a href="search.html">Find Candidates</a><i class="fa fa-angle-down"></i>
 						<ul>
-							<li><a href="blog.html">BLOG</a></li>							
-							<li><a href="blog-2.html">BLOG 2</a></li>						
+							<li><a href="author-edit.html">AUTHOR EDIT</a></li>
+							<li><a href="author-login.html">AUTHOR LOGIN</a></li>
+							<li><a href="messages.html">MESSAGES</a></li>
+							<li><a href="messages-2.html">MESSAGES 2</a></li>
+						</ul>
+					</li>
+					<li><a href="blog-detail-2.html">Community</a><i class="fa fa-angle-down"></i>
+						<ul>
+							<li><a href="blog.html">BLOG</a></li>
+							<li><a href="blog-2.html">BLOG 2</a></li>
 							<li><a href="blog-3.html">BLOG 3</a></li>
 							<li><a href="statictics.html">STATISTICS</a></li>
 							<li><a href="faq.html">FAQ</a></li>
 							<li><a href="about-us.html">ABOUT US</a></li>
 							<li><a href="contact-us.html">CONTACT US</a></li>
 							<li><a href="shortcodes.html">SHORTCODES</a></li>
-						</ul></li>
-					</ul>
-				</div>
-				<div class="login-header-block">
-					<div class="login_block">
-						<a class="btn-login btn color-1 size-2 hover-2" href="blog-detail-2.html"><i class="fa fa-user"></i>
+						</ul>
+					</li>
+				</ul>
+			</div>
+
+			<div style="margin-top:0" class="login-header-block">
+				<div  id="show-infor" class="login_block">
+						<% if(typeof username === 'undefined') { %> 
+						<a style="margin-top:15px" id="btn-login" class="btn-login btn color-1 size-2 hover-2" href="blog-detail-2.html"><i class="fa fa-user"></i>
 						Log in</a>
+						
+						<% } else { %>
+									<div style="margin:0; padding:0"  class="btn color-1 be-drop-down dropdown">
+										<span style="margin-right:20px; margin-bottom:0; " class="btn color-1 size-2  dropdown toggle" data-toggle="dropdown">BẠN CÓ THỂ</span>
+										<ul class="dropdown-menu">
+											<li><a href="#">TẠO ĐỊA ĐIỂM</a></li>
+											<li><a href="#">TẠO HÀNH TRÌNH</a></li>
+											<li><a href="#">BỘ SƯU TẬP</a></li>
+											
+										</ul>
+									</div>
+									<div style="margin:0; padding:0" class="be-drop-down login-user-down dropdown">
+										<span style="margin-top:5px; margin-bottom:0 " class="be-dropdown-content btn dropdown toggle" data-toggle="dropdown"><img class="login-user" src="<%= detailUser.avatar %>" alt="">
+										Hi, <%= detailUser.last_name + " " +  detailUser.first_name %><span></span></span>
+										
+										<ul style="background-color: white" class="dropdown-menu">
+												<li style="padding:3px 3px 3px 3px; color:black;font-size:9pt"><a href="#">BỘ SƯU TẬP ĐỊA ĐIỂM</a></li>
+												<li  style="padding:3px 3px 3px 3px; color:black;font-size:9pt"><a href="#">BỘ SƯU TẬP HÀNH TRÌNH</a></li>
+												<li  style="padding:3px 3px 3px 3px; color:black;font-size:9pt"><a href="#">KHO ẢNH CỦA BẠN</a></li>
+												<li style="padding:3px 3px 3px 3px; color:black;font-size:9pt"><a href="/profile">CẬP NHẬT TÀI KHOẢN</a></li>
+												<li  style="padding:3px 3px 3px 3px; color:black;font-size:9pt"><a id="logout" >THOÁT</a></li>
+										</ul>
+									</div>																		
+						<% } %>
+
 					</div>	
-				</div>
 			</div>
 		</div>
-	</header>
-		
+	</div>
+</header>
+
+<div class="large-popup login">
+
+	<div class="large-popup-fixed"></div>
+
+	<div id="form-login" class="container large-popup-container">
+		<div class="row">
+			<div class="col-md-8 col-md-push-2 col-lg-6 col-lg-push-3  large-popup-content">
+				<div class="row">
+					<div class="col-md-12">
+						<i class="fa fa-times close-button"></i>
+						<h5 class="large-popup-title">Log in</h5>
+					</div>
+					<form action="/login" method="post" class="popup-input-search">
+						<div class="col-md-6">
+							<input class="input-signtype" name="username" type="text" required="" placeholder="Username hoặc email">
+						</div>
+						<div class="col-md-6">
+							<input class="input-signtype" name="password" type="password" required="" placeholder="Mật khẩu">
+						</div>
+						<div class="col-xs-6">
+							<div class="be-checkbox">
+								<label class="check-box">
+								    <input class="checkbox-input" type="checkbox" value=""> <span class="check-box-sign"></span>
+								</label>
+								<span class="large-popup-text">
+									Stay signed in
+								</span>
+							</div>
+
+							<a href="blog-detail-2.html" class="link-large-popup">Forgot password?</a>
+							<a id="register" class="be-register btn "><i class="fa fa-lock"></i>sign up now</a>
+						</div>
+						<div class="col-xs-6 for-signin">
+							<button id="login" class="be-popup-sign-button" value="">SIGN IN</button>
+							<div id="fb-login" style="margin-right: 2em;" class="be-popup-sign-button">
+								<fb:login-button size="icon" onlogin='window.location.reload(true);'>sign up via facebook</fb:login-button>
+							</div>
+						</div>
+
+
+				</div>
+				</form>
+
+			</div>
+		</div>
+	</div>
+</div>
+
+</div>
+<div class="large-popup register">
+	<div class="large-popup-fixed"></div>
+	<div class="container large-popup-container">
+		<div class="row">
+			<div class="col-md-10 col-md-push-1 col-lg-8 col-lg-push-2 large-popup-content">
+				<div class="row">
+					<div class="col-md-12">
+						<i class="fa fa-times close-button"></i>
+						<h5 class="large-popup-title">Register</h5>
+					</div>
+					<form action="/register" method="post" class="popup-input-search">
+						<div class="col-md-6">
+							<input class="input-signtype" type="text" required="" name="txtFirstName" placeholder="First Name">
+						</div>
+						<div class="col-md-6">
+							<input class="input-signtype" type="text" required="" name="txtLastName" placeholder="Last Name">
+						</div>
+						<div class="col-md-6">
+							<input class="input-signtype" type="text" required="" name="txtUsername" placeholder="Username">
+						</div>
+						<div class="col-md-6">
+							<input class="input-signtype" type="text" required="" name="txtEmail" placeholder="Email">
+						</div>
+						<div class="col-md-6">
+							<input class="input-signtype" type="text" required="" name="txtPassword" placeholder="Password">
+						</div>
+						<div class="col-md-6">
+							<input class="input-signtype" type="text" required="" name="txtRepeatPassword" placeholder="Repeat Password">
+						</div>
+						<div class="col-md-12 be-date-block">
+
+
+						</div>
+						<div class="col-md-6">
+							<div class="be-checkbox">
+								<label class="check-box">
+								    <input class="checkbox-input" type="checkbox" required="" value="" > <span class="check-box-sign"></span>
+								</label>
+								<span class="large-popup-text">
+									I have read and agree to the <a class="be-popup-terms" href="blog-detail-2.html">Terms of Use</a> and <a class="be-popup-terms" href="blog-detail-2.html">Privacy Policy</a>.
+								</span>
+							</div>
+							<div class="be-checkbox">
+								<label class="check-box">
+								    <input class="checkbox-input" type="checkbox" value="" > <span class="check-box-sign"></span>
+								</label>
+								<span class="large-popup-text">
+									Send me notifications
+								</span>
+							</div>
+						</div>
+
+				</div>
+				<div class="col-md-6 for-signin">
+					<input type="submit" class="be-popup-sign-button" value="SIGN IN">
+					<div id="fb-login" style="margin-right: 2em;" class="be-popup-sign-button">
+						<fb:login-button size="icon" onlogin='window.location.reload(true);'>sign up via facebook</fb:login-button>
+					</div>
+				</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+</div>

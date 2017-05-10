@@ -14,7 +14,7 @@ module.exports = (req, res) => {
             sign({username}).then(token => {
                 res.cookie('tk_lg', token);
                 req.session.login = 1;
-                res.redirect('http://localhost:3000/');
+                res.redirect('./');
             }).catch(e=> console.log('loi sign'+e));
         }).catch(er=>console.log('loi insert'+er));
     });

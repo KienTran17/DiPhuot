@@ -19,6 +19,6 @@ module.exports =  (req, res)=>{
                 }
                 res.cookie(prop, '', { expires: new Date(0) });
             }
-        res.redirect('http://localhost:3000/')
+        res.redirect('./')
     });
 }

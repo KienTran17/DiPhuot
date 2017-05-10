@@ -9,7 +9,7 @@ module.exports =  (req, res)=>{
         if(result) {
             sign({username}).then(token=>{
                 res.cookie('tk_lg',token);
-                res.redirect('http://localhost:3000/');
+                res.redirect('./');
             });
         }
     })

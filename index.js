@@ -16,7 +16,7 @@ app.use(session({
     }
 }));
 app.use(cookieParser());
-app.listen('3000', () => console.log('server started'));
+app.listen(process.env.PORT || '3000');
 
 
 //gói body-parser lấy dữ liệu từ form (POST) trong ejs

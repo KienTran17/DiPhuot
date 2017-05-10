@@ -1,18 +1,19 @@
 {
-  "name": "DiPhuot",
-  "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
   },
+  "name": "DiPhuot",
+  "version": "1.0.0",
+  "description": "",
+  
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/KienTran17/DiPhuot.git"
   },
   "keywords": [],
   "author": "",
-  "license": "MIT",
   "bugs": {
     "url": "https://github.com/KienTran17/DiPhuot/issues"
   },

@@ -12,7 +12,7 @@ module.exports = (req, res) => {
                 //res.send(req.cookies);
                 getUserByUsername(r.username).then(detailUser => {
                     res.render('./front-end/home/index', { lstPlace: lstPlace.rows, username: r.username, detailUser: detailUser.rows[0] });
-                }).catch(() => res.send('loi'));
+                }).catch((e) => res.send("loi"+e));
             });
         })
         .catch(() => getListPlace().then(lstPlace => {

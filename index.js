@@ -4,7 +4,7 @@ const app = express();
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 
-let getArrayUpload = require('./upload.js');
+
 let parser = require('body-parser').urlencoded({ extended: false });
 
 app.use(session({
@@ -36,8 +36,9 @@ app.post('/login', parser, require('./controller/user/login'));
 
 app.get('/profile', parser, require('./controller/user/userDetail'));
 
+//đổi ajax
 app.post('/register', parser, require('./controller/user/register'));
-
+//đổi ajax
 app.post('/saveuser', parser, require('./controller/user/saveuser'));
 
 app.get('/logout', require('./controller/user/logout'));
@@ -48,31 +49,16 @@ app.get('/getuser/:token', require('./controller/api/getUser'));
 
 app.get('/createplace', parser, require('./controller/user/userCreatePlace'));
 
-app.post('/file-upload-batch/2', parser, (req,res)=>{
-     getArrayUpload("image")(req, res, function(err){
-    if(err){
-      res.send(''+err);
-    }else{
-    
-      res.send('0');
-    }
-  })
-});
+app.post('/createplace',parser, require('./controller/user/addPlace'));
 
-app.post('/createplace', parser, (req,res)=>{
-    getArrayUpload("image")(req, res, function(err){
-    if(err){
-      res.send(''+err);
-    }else{
-      if(req.session.filename)
-      res.send(req.session.filename);
-      else res.send(JSON.stringify(req.files));
-    }
-  })
-    
-});
+//đổi ajax
+app.post('/place/getward',parser, require('./controller/place/getWard'));
+
+app.post('/upload',parser, require('./controller/user/addPlace'));
+
 // app.post("/upload",  fn);
 
 // http.createServer(app).listen(app.get('port'), function () {
 //     console.log('Express server listening on port ' + app.get('port'));
 // });
+

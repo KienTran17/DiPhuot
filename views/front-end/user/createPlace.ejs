@@ -2,49 +2,51 @@
   <% include ../layout/header %>
     <div id="content-block">
       <div class="container be-detail-container">
-      <form action="/createplace" class="form-horizontal" method="POST" enctype="multipart/form-data">
-        <div class="row">
-          <div class="col-xs-12 col-md-8 left-feild">
-            <div style="background-color: rgb(183, 211, 250);" class="container">
-              <div style="text-align: center" class="header-page">
-                <br>
-                <span>
+        <form action="/createplace" class="form-horizontal" method="POST" enctype="multipart/form-data">
+          <div class="row">
+            <div class="col-xs-12 col-md-8 left-feild">
+              <div style="background-color: rgb(183, 211, 250);" class="container">
+                <div style="text-align: center" class="header-page">
+                  <br>
+                  <span>
            							<h2><i class="fa fa-heart"></i> THÊM ĐỊA ĐIỂM</h2>
-									   <br>
-									   <span>Những địa điểm - cảnh đẹp bạn đã khám phá chưa có trên ĐiPhượt.com ? Cùng nhau chia sẻ nào!</span>
-                </span>
-              </div>
-              <hr>
-              <div class="col-xs-12 col-md-10">
+									   <span style="font-style: italic;">Những địa điểm - cảnh đẹp bạn đã khám phá chưa có trên ĐiPhượt.com ? Cùng nhau chia sẻ nào!</span>
+                  </span>
+                </div>
+                <hr>
+                <div class="col-xs-12 col-md-10">
                   <div class="form-group">
                     <label class="col-sm-3 control-label">Tên địa điểm</label>
                     <div class="col-sm-9">
-                      <input data-val-required="Nhập tên địa điểm" maxlength="100" id="txtNamePlace" type="text" class="form-control" name="txtNamePlace"
+                      <input required="Nhập tên địa điểm" maxlength="100" id="txtNamePlace" type="text" class="form-control" name="txtNamePlace"
                         placeholder="Tên địa điểm">
+                        <span style="color: red; font-style: italic;" id="valName"></span>
                       <br>
                     </div>
                     <label class="col-sm-3 control-label">Loại hình phượt</label>
                     <div class="col-sm-9">
                       <div class="form-checkbox">
                         <label class="checkbox-inline">
-                          <input type="checkbox" value="">Treckking
+                          <input id="cbTreckking" name="cbTreckking" type="checkbox" >Treckking
                         </label>
                         <label class="checkbox-inline">
-                          <input type="checkbox" value="">Cắm trại
+                          <input id="camping" name="camping" type="checkbox" >Cắm trại
                         </label>
                         <label class="checkbox-inline">
-                          <input type="checkbox" value="">Ngắm cảnh
+                          <input id="seeView" name="seeView" type="checkbox" >Ngắm cảnh
                         </label>
                         <label class="checkbox-inline">
-                          <input type="checkbox" value="">Leo núi
+                          <input id="cbClaimb" name="cbClaimb" type="checkbox" >Leo núi
                         </label>
                       </div>
+                      <span style="color: red; font-style: italic;" id="valCheckbox"></span>
                       <br>
                     </div>
                     <label class="col-sm-3 control-label">Địa chỉ</label>
                     <div class="col-sm-9">
-                      <input maxlength="100" data-val-required="Nhập địa chỉ" id="txtAddress" type="text" class="form-control" name="txtAddress"
+                      <input maxlength="100" required="Nhập địa chỉ" id="txtAddress" type="text" class="form-control" name="txtAddress"
                         placeholder="Địa chỉ">
+                        <span style="color: red; font-style: italic;" id="valAddress"></span>
                       <input placeholder="Search địa điểm" id="input" type="text" class="col-sm-4" style="font-family: Comic Sans MS, cursive, sans-serif; font-size: 13pt;margin: 10px; border: 1px solid transparent; border-radius: 2px 0 0 2px; box-sizing: border-box; -moz-box-sizing: border-box;"
                       />
                       <br>
@@ -52,69 +54,84 @@
                     <div class="row">
                       <label for="inputPassword" class="col-sm-3 control-label">Tỉnh thành</label>
                       <div class="col-sm-2">
-                        <select id="ddlProvinces" name="ProvinceId" class="content">
-                        <option selected="selected" value="217">TP. HCM</option>
-                      </select>
-                      </div>
-                      <div class="col-sm-2">
-                        <select id="ddlProvinces" name="ProvinceId" class="content">
-                        <option selected="selected" value="217">TP. HCM</option>
-                      </select>
+                        <select id="ddlCity" onchange="selectCity()" name="cityId" class="content  control-label">
+                        <option value="0">Tỉnh/ Thành Phố</option>
+                        <% lstCity.map((e,i) =>{ %>
+                          <option value="<%= e.id %>"><%= e.name %></option>
+                        <% }) %>
                         
+                        </select>
+                        <br>
                       </div>
+                      <br>
+                      <div class="col-sm-2">
+                        <select id="ddlProvinces" name="provinceId" class="content  control-label">
+                        <option value="0">Quận/ Huyện</option>
+                      </select>
+                      </div>
+                      <span style="color: red; font-style: italic;" id="valCity"></span>
+                      
                     </div>
+                    
                     <br>
                     <label class="col-sm-3 control-label">Map</label>
                     <div class="col-sm-9" id="map" style="margin-bottom: 20px; height: 300px">
                     </div>
-
+                    
                     <label for="inputPassword" class="col-sm-3 control-label">Vị trí tọa độ</label>
                     <div class="col-sm-4">
-                      <input class="form-control" id="lat" type="text" placeholder="latidude" disabled>
+                      <input class="form-control" required id="lat" type="text" placeholder="latidude" disabled>
                     </div>
                     <div class="col-sm-4">
-                      <input class="form-control" id="lng" type="text" placeholder="longitude" disabled>
+                      <input class="form-control" required id="lng" type="text" placeholder="longitude" disabled>
                       <br>
                     </div>
                     <label class="col-sm-3 control-label">Mô tả địa điểm</label>
                     <div class="col-sm-9">
-                      <textarea rows="3" data-val-required="Nhập mô tả địa điểm" id="txtDesPlace" class="form-control" name="txtDesPlace" placeholder="Mô tả địa điểm"></textarea>
-                      <br>
+                      <textarea rows="3" required="Nhập mô tả địa điểm" id="txtDesPlace" class="form-control" name="txtDesPlace" placeholder="Mô tả địa điểm"></textarea>
+                      <span style="color: red; font-style: italic;" id="valDesc"></span>
+                 
                     </div>
-
+                    <label class="col-sm-3"></label>
+                    <h4 class="col-sm-9 " style="text-align: center; color: black; font-style: italic;font-weight:bold" id="valAddress">
+                      Bạn hãy chọn những hình ảnh đẹp mà bạn ăn ý nhất để upload nhé!
+                        
+                    </h4>
                     <label class="col-sm-3 control-label">Thêm hình ảnh</label>
                     <div class="col-sm-9">
-                      <input data-val-required="Thêm hình ảnh tiêu biểu" id="input-repl-2" name="image" type="file" class="file-loading" lang="vi" accept="image/*" multiple>
+                         <input id="input-ke-1" name="inputKE1[]" type="file" multiple class="file-loading" accept="image">
+
                       <br>
-                      <button type="submit" class="btn btn-primary" value="Submit">Submit</button>
-                      
-                      <button type="reset" class="btn btn-default">Reset</button>
-                      <div><br></div>
                     </div>
                   </div>
 
-            
-              </div>
 
+                </div>
+
+              </div>
             </div>
-          </div>
-          <!--// <div class="col-xs-12 col-md-8">
+            <!--// <div class="col-xs-12 col-md-8">
           //   aksdflsad
           // </div>-->
-        </div>
-            </form>
+          </div>
+        </form>
       </div>
     </div>
-   
+          <script type="text/javascript">
+            $("#input-ke-1").fileinput({
+                theme: "explorer",
+                uploadUrl: "/upload",
+                allowedFileExtensions: ['jpg', 'png', 'gif'],
+                overwriteInitial: false,
+                initialPreviewAsData: true
+               
+            });
+          </script>
     <script>
       // In the following example, markers appear when the user clicks on the map.
       // Each marker is labeled with a single alphabetical character.
-      $("#input-repl-2").fileinput({
-                            uploadUrl: "/file-upload-batch/2",
-                            autoReplace: true,
-                            maxFileCount: 10,
-                            allowedFileExtensions: ["jpg", "png", "gif"]
-                        });
+
+      
       var labels = '';
       var labelIndex = 0;
       var markers = [];
@@ -204,7 +221,52 @@
         //addMarker(bangalore, map);
       }
 
-
+      function checkInput(){
+        var name = document.getElementById('txtNamePlace').value;
+        var valName = document.getElementById('valName');
+        var address = document.getElementById('txtAddress').value;
+        var valAddress = document.getElementById('valAddress');
+        var desc = document.getElementById('txtDesPlace').value;
+        var valDesc = document.getElementById('valDesc');
+        var cbClaimb = document.getElementById('cbClaimb').value;
+        var seeView = document.getElementById('seeView').value;
+        var cbTreckking = document.getElementById('cbTreckking').value;
+        var camping = document.getElementById('camping').value;
+        var city = document.getElementById('ddlCity').value;
+        var valCity = document.getElementById('valCity');
+        var ward = document.getElementById('ddlProvinces').value;
+        if(name === "" ) {
+          valName.innerHTML = "Nhập tên địa điểm"
+          $('html, body').animate({scrollTop: $('#txtNamePlace').offset().top-80}, "slow");
+          return false;
+        }
+        else
+        if(address === "" ) {
+          valName.innerHTML = "";
+          valAddress.innerHTML = "Nhập địa chỉ";
+          $('html, body').animate({scrollTop: $('#txtAddress').offset().top-80}, "slow");
+          return false;
+        }
+        else
+        if(city === '0' || ward === '0' ) {
+          valName.innerHTML = "";
+          valAddress.innerHTML = "";
+          valCity.innerHTML = "Chọn Thành phố/ Tỉnh sau đó chọn Quận/Huyện";
+          $('html, body').animate({scrollTop: $('#ddlCity').offset().top-80}, "slow");
+          return false;
+        }
+        else
+        if(desc === "" ) {
+          valName.innerHTML = "";
+          valAddress.innerHTML = "";
+          valCity.innerHTML = "";
+          valDesc.innerHTML = "Nhập tên mô tả địa điểm";
+          $('html, body').animate({scrollTop: $('#txtDesPlace').offset().top-80}, "slow");
+          return false;
+        }
+        else 
+         return alert(`Cám ơn những chia sẽ của bạn!  Chúc bạn có những hành trình phượt thật là thú vị và khó quên nhé ^^`);
+      }
       // Adds a marker to the map.
       function addMarker(location, map) {
 
@@ -242,4 +304,25 @@
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAL0C1dheOG0o01S5e9FOTlVasfsAylyes&libraries=places&callback=initAutocomplete"
       async defer></script>
+    <script>
+      function selectCity() {
+        $(document).ready(() => {
+          var cityId = document.getElementById("ddlCity").value;
+          if(cityId === 0) return;
+          var ward = document.getElementById("ddlProvinces");
+          $.ajax({
+            type: "POST",
+            url: 'http://localhost:3000/place/getward',
+            data: {id: cityId}, // serializes the form's elements.
+            success: function (data) {
+              ward.innerHTML = "<option>Quận/ Huyện</option>";
+              data.map((e)=>{
+                ward.innerHTML+= `<option value=${e.id}>${e.name}</option>`;
+              })
+              //console.log(data); // show response from the php script.
+            }
+          });
+        });
+      }
+    </script>
     <% include ../layout/footer %>

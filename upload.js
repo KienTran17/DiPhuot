@@ -20,15 +20,15 @@ function fileFilter (req, file, cb) {
 let upload = multer({
     storage, 
     
-    limits: {fileSize: 5 * 1024},
+    limits: {fileSize: 1024 * 1024},
     fileFilter
 }).any(); //1111
 
 var limits = {
-  fileSize: 1024*1024
+  fileSize: 2097152*20
 }
 
 function getArrayUpload(fieldname){
-  return multer({storage, fileFilter, limits}).array(fieldname);
+  return multer({storage, fileFilter, limits }).array(fieldname);
 }
 module.exports = getArrayUpload;

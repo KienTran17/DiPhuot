@@ -5,6 +5,9 @@ import ListPlace from './components/user/ListPlace';
 
 import ListJourney from './components/user/ListJourney'; 
 
+
+
+
 ReactDOM.render(
     <ListPlace  />,
     document.getElementById('listPlace')
@@ -14,6 +17,7 @@ ReactDOM.render(
     <ListJourney  />,
     document.getElementById('listJourney')
 );
+
 
 
 //yarn add  add babel-core babel-loader babel-preset-react

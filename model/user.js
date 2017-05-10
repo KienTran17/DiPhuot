@@ -18,7 +18,7 @@ const checkLogin = (u, p) => (
 )
 
 const getUserByUsername = (username) => (
-    queryDB(`SELECT id, first_name, last_name, email, view, "like", avatar, link_facebook, album_id, journey_id, place_id, username, facebook_id, google_id
+    queryDB(`SELECT id, first_name, last_name, email, view, "like", avatar, link_facebook, username, facebook_id, google_id
 	FROM public."user" where username = $1 or email = $1`, [username])
 )
 

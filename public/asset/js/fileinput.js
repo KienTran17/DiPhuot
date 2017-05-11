@@ -451,7 +451,7 @@
             tBtnDefault = '<button type="{type}" tabindex="500" title="{title}" class="{css}" ' +
                 '{status}>{icon} {label}</button>';
             //noinspection HtmlUnknownAttribute
-            tBtnLink = '<a onclick="return checkInput();" href="{href}" tabindex="500" title="{title}" class="{css}" {status}>{icon} {label}</a>';
+            tBtnLink = '<a href="{href}" tabindex="500" title="{title}" class="{css}" {status}>{icon} {label}</a>';
             //noinspection HtmlUnknownAttribute
             tBtnBrowse = '<div tabindex="500" class="{css}" {status}>{icon} {label}</div>';
             tModalMain = '<div id="' + $h.MODAL_ID + '" class="file-zoom-dialog modal fade" ' +
@@ -489,7 +489,7 @@
             //noinspection HtmlUnknownAttribute
             tActionDelete = '<button type="button" class="kv-file-remove {removeClass}" ' +
                 'title="{removeTitle}" {dataUrl}{dataKey}>{removeIcon}</button>\n';
-            tActionUpload = '<button type="button" style="display:none" class="kv-file-upload {uploadClass}" title="{uploadTitle}">' +
+            tActionUpload = '<button type="button" class="kv-file-upload {uploadClass}" title="{uploadTitle}">' +
                 '{uploadIcon}</button>';
             tActionZoom = '<button type="button" class="kv-file-zoom {zoomClass}" ' +
                 'title="{zoomTitle}">{zoomIcon}</button>';
@@ -1952,7 +1952,6 @@
                 }
             };
             fnSuccess = function (data, textStatus, jqXHR) {
-				
                 var pid = self.showPreview && $thumb.attr('id') ? $thumb.attr('id') : previewId;
                 outData = self._getOutData(jqXHR, data);
                 $.extend(true, params, outData);
@@ -1978,7 +1977,6 @@
                         }
                     }
                 }, 100);
-				//window.location.href = "./profile";
             };
             fnComplete = function () {
                 setTimeout(function () {

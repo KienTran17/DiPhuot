@@ -8,7 +8,8 @@ module.exports =  (req, res)=>{
     checkLogin (username,password).then(result=>{
         if(result) {
             sign({username}).then(token=>{
-                res.cookie('tk_lg',token);
+                res.session.username = username;
+                req.cookie('tk_lg',token);
                 res.redirect('./');
             });
         }

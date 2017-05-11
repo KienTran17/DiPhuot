@@ -4,7 +4,7 @@ const app = express();
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 
-
+const authentication = require('./config/authentication')
 let parser = require('body-parser').urlencoded({ extended: false });
 
 app.use(session({
@@ -34,7 +34,7 @@ app.get('/journey/:id', parser, require('./controller/journey/detail_journey'));
 
 app.post('/login', parser, require('./controller/user/login'));
 
-app.get('/profile', parser, require('./controller/user/userDetail'));
+app.get('/profile', authentication , require('./controller/user/userDetail'));
 
 //đổi ajax
 app.post('/register', parser, require('./controller/user/register'));
@@ -43,18 +43,20 @@ app.post('/saveuser', parser, require('./controller/user/saveuser'));
 
 app.get('/logout', require('./controller/user/logout'));
 
+//api 
 app.get('/getplace/:token/:idUser', require('./controller/api/getPlace'));
 app.get('/getjourney/:token/:idUser', require('./controller/api/getJourney'));
 app.get('/getuser/:token', require('./controller/api/getUser'));
 
-app.get('/createplace', parser, require('./controller/user/userCreatePlace'));
+app.get('/createplace',authentication, parser, require('./controller/user/userCreatePlace'));
 
 app.post('/createplace',parser, require('./controller/user/addPlace'));
 
 //đổi ajax
 app.post('/place/getward',parser, require('./controller/place/getWard'));
 
-app.post('/upload',parser, require('./controller/user/addPlace'));
+
+app.post('/insertPlace',parser, require('./controller/user/insertPlace'));
 
 // app.post("/upload",  fn);
 

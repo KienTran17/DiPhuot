@@ -12,9 +12,12 @@ const getListPlaceFromUser = (id) => (
     queryDB(`select * from "place" where user_id = $1`, [id])
 );
 
-const addPlace = (txtNamePlace, cbTreckking, camping, seeView, cbClaimb,
-    txtAddress, cityId, provinceId, txtDesPlace, arrFile, userId) => {
-        queryDB(`insert into "place" (name,) value  ()`)
-}
+const addPlace = (name, address, status, city_id,
+    ward_id, lat, lng, description, date_create, user_id, treckking, camping, seeview, claimb) => (
+        queryDB(`insert into "place" (name, address, status, city_id, 
+        ward_id, lat, lng, description, date_create, user_id, treckking, camping, seeview, claimb) values
+         ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14) returning id`, [name, address, status, city_id,
+                ward_id, lat, lng, description, date_create, user_id, treckking, camping, seeview, claimb])
+    )
 
 module.exports = { addPlace, getListPlace, getPlaceFromId, getListPlaceFromUser };

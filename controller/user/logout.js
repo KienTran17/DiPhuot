@@ -2,6 +2,7 @@ const cookieParser = require('cookie-parser');
 
 module.exports =  (req, res)=>{
     cookie = req.cookies;
+    req.session.username = undefined;
     for (var prop in cookie) {
         if (!cookie.hasOwnProperty(prop)) {
             continue;

@@ -10617,12 +10617,12 @@ var Place = function (_Component) {
 					_react2.default.createElement(
 						"a",
 						{ href: "/place/" + place.id, className: "be-img-block" },
-						_react2.default.createElement("img", { src: place.image, alt: place.title })
+						_react2.default.createElement("img", { src: place.link, alt: place.name })
 					),
 					_react2.default.createElement(
 						"a",
 						{ href: "/place/" + place.id, className: "be-post-title" },
-						place.title
+						place.name
 					),
 					_react2.default.createElement(
 						"span",

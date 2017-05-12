@@ -12,7 +12,8 @@ module.exports = (req, res) => {
                 const username = data.email;
                 sign({username}).then(token=>{
                 //console.log(token);
-                res.send({token});
+                req.session.username = username;
+                res.send({token,username});
                 //res.redirect('http://localhost:3000/');
                 });
             })
@@ -22,7 +23,8 @@ module.exports = (req, res) => {
             const username = data.email;
             sign({username}).then(token=>{
                 //console.log(token);
-                res.send({token});
+                req.session.username = username;
+                res.send({token,username});
                 //res.redirect('http://localhost:3000/');
             });
         }

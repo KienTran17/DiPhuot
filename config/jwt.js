@@ -13,7 +13,7 @@ const verify = (token)=>(
 
 const sign = (input) =>(
     new Promise((resolve, reject)=>{
-        jwt.sign(input,SECRET_KEY,{expiresIn: 10000},(e,r)=>{
+        jwt.sign(input,SECRET_KEY,{expiresIn: 86400},(e,r)=>{
             if(e) return reject(e);
             return resolve(r);
         });

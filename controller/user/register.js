@@ -13,7 +13,7 @@ module.exports = (req, res) => {
             const username = txtUsername;
             sign({username}).then(token => {
                 res.cookie('tk_lg', token);
-                req.session.login = 1;
+                req.session.username = username;
                 res.redirect('./');
             }).catch(e=> console.log('loi sign'+e));
         }).catch(er=>console.log('loi insert'+er));

@@ -12,7 +12,7 @@ app.use(session({
     saveUninitialized: true,
     resave: true,
     cookie: {
-        maxAge: 20000
+        maxAge: 86400
     }
 }));
 app.use(cookieParser());
@@ -50,16 +50,18 @@ app.get('/getuser/:token', require('./controller/api/getUser'));
 
 app.get('/createplace',authentication, parser, require('./controller/user/userCreatePlace'));
 
-app.post('/createplace',parser, require('./controller/user/addPlace'));
+//app.post('/createplace', authentication ,parser, require('./controller/user/addPlace'));
 
 //đổi ajax
 app.post('/place/getward',parser, require('./controller/place/getWard'));
 
 
-app.post('/insertPlace',parser, require('./controller/user/insertPlace'));
+app.post('/insertPlace',authentication, parser, require('./controller/user/insertPlace'));
 
 // app.post("/upload",  fn);
 
+
+app.get('/createjourney',authentication, parser, require('./controller/user/userCreateJourney'));
 // http.createServer(app).listen(app.get('port'), function () {
 //     console.log('Express server listening on port ' + app.get('port'));
 // });

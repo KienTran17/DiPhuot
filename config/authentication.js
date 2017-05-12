@@ -5,7 +5,9 @@ const authentication = (req, res, next) => {
     const token = req.cookies.tk_lg;
     verify(token)
         .then(r => {
-            req.session.username = r.username;
+            //console.log('ok ne');
+            req.session.username = r.username+'';
+            console.log(req.session.username);
             next();
         })
         .catch((e) => {
@@ -17,7 +19,7 @@ const authentication = (req, res, next) => {
                 }
                 res.cookie(prop, '', { expires: new Date(0) });
             }
-            //res.redirect('./')
+            res.redirect('./')
         });
 }
 

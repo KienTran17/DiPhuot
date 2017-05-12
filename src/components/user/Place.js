@@ -8,9 +8,9 @@ export default class Place extends Component {
 			<div className="col-ml-12 col-xs-6 col-sm-4">
 				<div className="be-post">
 					<a href={"/place/"+place.id} className="be-img-block">
-						<img src={place.image} alt={place.title} />
+						<img src={place.link} alt={place.name} />
 					</a>
-					<a href={"/place/"+place.id} className="be-post-title">{place.title}</a>
+					<a href={"/place/"+place.id} className="be-post-title">{place.name}</a>
 					<span>
 						<a href={"/place/"+place.id} className="be-post-tag">{place.description}</a>,
 												

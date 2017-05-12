@@ -4,7 +4,7 @@ const { sign } = require('../../config/jwt');
 const { insertImage } = require('../../model/image');
 const cookieParser = require('cookie-parser');
 const { getUserByUsername } = require('../../model/user');
-const {  } = require('../../model/place');
+const { addPlace } = require('../../model/place');
 
 const todaysDate = new Date();
 
@@ -21,20 +21,33 @@ function convertDate(date) {
 
 module.exports = (req, res) => {
     const username = req.session.username;
-    const { txtNamePlace, cbTreckking, camping, seeView, cbClaimb, txtAddress, cityId, provinceId, txtDesPlace } = req.body;
+
     getArrayUpload("image")(req, res, function (err) {
+        let { lat, lng, txtNamePlace, cbTreckking, camping, seeView, cbClaimb, txtAddress, cityId, provinceId, txtDesPlace } = req.body;
         if (err) {
             res.send('Loi' + err);
         } else {
+            if (!cbTreckking) cbTreckking = false; else cbTreckking = true;
+            if (!camping) camping = false; else camping = true;
+            if (!seeView) seeView = false; else seeView = true;
+            if (!cbClaimb) seeView = false; else cbClaimb = true;
+            console.log(lat, lng);
             getUserByUsername(username).then(user => {
                 //first insert place end get id
+                req.session.username = username + '';
+                addPlace(txtNamePlace, txtAddress, 1, cityId, provinceId, lat, lng, txtDesPlace,
+                    todaysDate, user.rows[0].id, cbTreckking, camping, seeView, cbClaimb)
+                    .then(idPlace => {
+                        const arrfile = req.files;
+                        arrfile.forEach(e => {
+                            insertImage(txtNamePlace, 'upload/' + e.filename, 0, 0, user.rows[0].id, idPlace.rows[0].id , todaysDate)
+                                .then(r => res.redirect('/profile'))
+                                .catch(err=> console.log('loi insert image : ' + err));
+                        });
+                    })
+                    .catch(e => console.log('loi insert place ' + e));
 
-                const arrfile = req.files;
-                arrfile.forEach(e => {
-                    insertImage(txtNamePlace, 'upload/' + e.filename, 0, 0, user.rows[0].id, place_id,todaysDate)
-                    .then(r=>r);
-                });
-            });
+            }).catch(er => console.log('loi truy van user: ' + er));
         }
     })
 }
